@@ -8,3 +8,23 @@
 	}
 
 ?>
+
+
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<title>
+			<?php 
+
+			?>
+		</title>
+
+		<!-- CSS -->
+		<link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/pesto.css" />
+
+		<!-- JavaScript -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</head>
