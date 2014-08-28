@@ -10,15 +10,8 @@
 				
 				<?php
 					function genPost($pesto) {
-						$result = file_get_contents('http://loripsum.net/api/5/medium/decorate/ul/ol/dl/bq/code/prude');
-						$limit = 1000;
-						if(strlen($result) > $limit) {
-							$endpos = strpos(str_replace(array("\r\n", "\r", "\n", "\t"), ' ', $result), ' ', $limit);
-							if($endpos !== FALSE) {
-								$result = trim(substr($result, 0, $endpos)) . "...";
-							}
-						}
-						return $result;
+						$result = file_get_contents('http://loripsum.net/api/5/link/medium/decorate/ul/ol/dl/bq/code/prude');
+						return $pesto->truncateHTML($result, 1000);
 					}
 
 					function genTitle($post) {
