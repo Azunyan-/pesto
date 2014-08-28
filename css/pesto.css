@@ -1,55 +1,77 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
 
+/*
+ * Copyright (c) 2014, Felix Angell.
+ * All Rights Reserved.
+ * http://www.github.com/freefouran/pesto
+ *
+ * You can do whatever you want with this file, as long
+ * as you credit me or include a link to the GitHub project!
+ * I've commented everything so non developers can change to styles
+ * hopefully!
+ */
+
+/** Everything within the body tag */
 body {
-	padding-top: 20px;
-	padding-bottom: 20px;	
-	background: #FFFFFF;
-	color: #000000;
-	font-family: 'Roboto', sans-serif;
-	margin-bottom: 120px; /** spacing at the bottom */
-}
+	padding-top: 20px;				   			/** some padding so everything isn't squished together */
+	padding-bottom: 20px;	           			/** some padding so everything isn't squished together */
+	background: #FFFFFF;			   			/** white base colour */
+	color: #000000; 				   			/** black everything */
+	font-family: 'Roboto', sans-serif; 			/** Roboto font for non headers */
+	margin-bottom: 120px; 			   			/** spacing at the bottom */
+}			
 
+/** Title of a Blog Post */
 .post-title {
-	text-transform: uppercase;
+	text-transform: uppercase;		   			/** make the post title uppercase */
 }
 
+/** Blog Post Dates */
 .post-date {
-	font-family: 'Roboto Slab', sans-serif;
+	font-family: 'Roboto Slab', sans-serif;		/** Roboto Slab for post-dates */
 }
 
+/** just there if I need it */
 .post-content {
 
 }
 
+/** Paragraphs */
+p {
+	color: #263248;
+}
+
+/** Headings */
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-transform: uppercase;
 }
 
+/** Blog Name in the header/navigation */
 .brand {
 	text-transform: uppercase;
 }
 
+/** navigation item backgrounds on hover */
 .nav-pills > li.active > a:hover,
 .nav-pills > li > a:hover {
 	background: #7E8AA2;
-	color: white;
+	color: #fff;
 }
 
+/** Navigation items (no hover) */
 .nav-pills > li > a {
-	color: #263248;
+	color: #263248; 
+	border-radius: 0;							/** flat design no rounded corners */
 }
 
+/** Navigation items active link color */
 .nav-pills > li.active > a {
-	background: #263248;
+	background: #263248;						
 }
 
-.nav-pills > li > a {
-	border-radius: 0;
-}
-
-/* 60 pixels of space instead of <br> */
+/* Use <div class="space"></div instead of <br />!! */
 div.space {
 	margin-top: 60px;
 }
@@ -64,17 +86,12 @@ textarea {
 	resize: vertical;
 }
 
-/** resize headers for responsive shit */
-@media screen and (min-width: 768px) {
-	.header {
-		margin-bottom: 30px;
-	}
-}
-
+/* add a line below the header */
 .header {
 	border-bottom: 1px solid #ccc;
 }
 
+/** brand header */
 .header h3 {
 	padding-bottom: 19px;
 	margin-top: 0;	
