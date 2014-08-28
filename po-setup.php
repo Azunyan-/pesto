@@ -4,6 +4,7 @@
 		<!-- Heading section with additional information -->
 		<div class="container">
 			<div class="row">
+				<?php include 'includes/po-gen-config.php' ?>
 				<div class="col-lg-8">
 					<h1>Setup Pesto</h1>
 					<p>
@@ -18,8 +19,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
-					<?php include 'po-gen-config.php' ?>
-
 					<!-- Form for config. generation -->
 					<form class="form" action="po-setup.php" method="POST" role="form">
 						<!-- Database form section -->

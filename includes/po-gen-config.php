@@ -4,12 +4,15 @@
 
 	# for generating the configuration file
 	if (isset($_POST['setup'])) {
+
+		# information for database connection
 		$database_host = $_POST['host'];
 		$database_port = $_POST['port'];
 		$database_name = $_POST['name'];
 		$database_user = $_POST['user'];
 		$database_pass = $_POST['pass'];	
 
+		# users desired blog info stuff
 		$blog_name 	   = $_POST['blogname'];
 		$blog_desc	   = $_POST['blogdesc'];
 		$display_name  = $_POST['displayname'];
@@ -28,7 +31,7 @@
 			$delete_users_sql = "DROP TABLE IF EXISTS `po-users`";
 			$delete_users_query = $pesto->getConnection()->query($delete_users_sql);
 			$delete_blog_posts_sql = "DROP TABLE IF EXISTS `po-blog-posts`";
-			$delete_blog_posts_query = $pesto->getConnection()->query($delete_users_sql);
+			$delete_blog_posts_query = $pesto->getConnection()->query($delete_blog_posts_sql);
 
 			# USERS TABLE
 			$create_users_sql = "
@@ -43,7 +46,7 @@
 				) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 			";
 			$create_users_query = $pesto->getConnection()->query($create_users_sql);
-			if ($create_users_query) {
+			if (!$create_users_query) {
 				$pesto->generateError("Failed to create `po-users` table!");
 			}
 
@@ -59,9 +62,11 @@
 				) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 			";
 			$create_blog_posts_query = $pesto->getConnection()->query($create_blog_posts_sql);
-			if ($create_blog_posts_query) {
+			if (!$create_blog_posts_query) {
 				$pesto->generateError("Failed to create `po-blog-posts` table!");
 			}
+
+			# GENERATE CONFIGURATION FILE
 
 			# We did it, generate a success message.
 			$pesto->generateSuccess("Database successfully populated");
@@ -70,12 +75,6 @@
 			# failed to connect
 			$pesto->generateError("Could not connect to the specified database");
 		}
-
-		# generate tables
-
-		# generate the file
-
-		# create the user add to tables
 	}
 	
 

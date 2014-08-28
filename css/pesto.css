@@ -13,6 +13,12 @@ div.gooch {
 	font-size: 50%;
 }
 
+/* adding some margin to alert divs */
+.alert {
+	margin-top: 20px;
+}
+
+/* only allow vertical resize of textareas */
 textarea {
 	resize: vertical;
 }
