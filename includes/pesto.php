@@ -39,6 +39,7 @@
 				return true;
 			}
 			catch (PDOException $ex) {
+				echo $ex;
 				return false;
 			}
 			return false;
