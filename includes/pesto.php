@@ -2,6 +2,10 @@
 
 	require_once '../libs/password.php';
 
+	define('ADMIN', 0);		# administrator, all priveleges
+	define('AUTHOR', 1);	# author, can only write posts
+	define('DEFAULT', 2);	# default, can only comment
+
 	class Pesto {
 
 		# if pesto is configured
@@ -168,8 +172,28 @@
 			}
 		}
 
-		public function register() {
+		# Registers a user with the given information
+		#
+		# $username  => username of user to register
+		# $password  => password of user to register
+		# $email     => email of the user to register
+		# $name      => name of the user to register
+		# $level     => the level of the account, 2 by default (DEFAULT_USER)
+		#
+		# returns true if the register was a success
+		public function register($username, $password, $email, $name, $level = DEFAULT) {
+			# TODO: check if user exists
 
+			# hash password with blowfish algorithm, default hash of 10
+			$hashed_pass = password_hash($password, PASSWORD_BCRYPT);
+			$register_user_sql = "INSERT INTO `po-users` (username, email, password, name, level) VALUES (:username, :email, :password, :name, :level)";
+			$register_user_query = $this->getConnection()->prepare($register_user_sql);
+			$register_user_query->bindParam(":username", $username);
+			$register_user_query->bindParam(":email", $email);
+			$register_user_query->bindParam(":password", $hashed_pass);
+			$register_user_query->bindParam(":name", $name);
+			$register_user_query->bindParam(":level", $level, PDO::PARAM_INT);
+			return $register_user_query->execute();
 		}
 
 		# redirect to the setup page for
