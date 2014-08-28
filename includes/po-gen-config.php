@@ -24,6 +24,10 @@
 		$conf_writer   = new FileWriter("po-config.php");
 		$secure_key    = $pesto->generateSecureKey();
 
+		if ($first_pass != $second_pass) {
+			$pesto->generateError("Passwords do not match");
+		}
+
 		# connect to database
 		if ($pesto->connectToDatabase($database_host, $database_port, $database_name, $database_user, $database_pass, $secure_key)) {
 			# we're good to go
@@ -88,10 +92,13 @@
 			$conf_writer->writeFile();
 
 			# ADD USER TO DATABASE
-			$pesto->registerUser();
+			$pesto->registerUser($display_name, $first_pass, $email, $full_name, 0);
 
 			# GENERATE MESSAGE STUFF
-			$pesto->generateSuccess("Database successfully populated");
+			$pesto->generateSuccess("
+				Tables created, administrator registered. Setup is complete, redirecting in <span id='counter'>5</span> seconds...<br />
+				Hasn't redirected yet? <a href='index.php'>click here</a>
+			");
 		}
 		else {
 			# failed to connect
@@ -99,5 +106,21 @@
 		}
 	}
 	
-
 ?>
+
+<script>
+function countdown() {
+	var counter = $('#counter').html();
+	var counter_index = parseInt(counter);
+	if (counter_index < 2) {
+		location.href = "index.php";
+	}
+	counter_index -= 1;
+	$('#counter').html(counter_index);
+}
+$(document).ready(function() {
+	if ($('#counter').is(':visible')) {
+		setInterval(countdown, 1000);
+	}
+});
+</script>

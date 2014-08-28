@@ -1,6 +1,6 @@
 <?php
 
-	require_once '../libs/password.php';
+	require_once 'libs/password.php';
 
 	define('ADMIN', 0);		# administrator, all priveleges
 	define('AUTHOR', 1);	# author, can only write posts
@@ -172,6 +172,15 @@
 			}
 		}
 
+		public function userExists($username, $email) {
+			$user_exists_check_sql = "SELECT id FROM `po-users` WHERE `username` = :username OR `email` = :email ORDER BY `id` LIMIT 1";
+			$user_exists_check_query = $this->getConnection()->prepare($user_exists_check_sql);
+			$user_exists_check_query->bindParam(":username", $username);
+			$user_exists_check_query->bindParam(":email", $email);
+			$user_exists_check_query->execute();
+			return !$user_exists_check_query->rowCount() == 0;
+		}
+
 		# Registers a user with the given information
 		#
 		# $username  => username of user to register
@@ -181,7 +190,7 @@
 		# $level     => the level of the account, 2 by default (DEFAULT_USER)
 		#
 		# returns true if the register was a success
-		public function register($username, $password, $email, $name, $level = DEFAULT) {
+		public function registerUser($username, $password, $email, $name, $level = 2) {
 			# TODO: check if user exists
 
 			# hash password with blowfish algorithm, default hash of 10
