@@ -1,5 +1,7 @@
 <?php
 
+	require_once '../libs/password.php';
+
 	class Pesto {
 
 		# if pesto is configured
@@ -125,9 +127,49 @@
 		# $username => username for the account we're logging into
 		# $password => password for the account we're logging into (raw)
 		# $cookies  => whether or not to use cookies
+		#
+		# returns true if logged in successfully, otherwise, false.
 		public function login($username, $password, $cookies = true) {
 			if ($this->isConfigured()) {
+				$add_user_sql   = "SELECT id, password FROM `po-users` WHERE `username` = :login ORDER BY `id` LIMIT 1";
+				$add_user_query = $this->getConnection()->prepare($add_user_sql);
+
+				$add_user_query->bindParam(":login", $username);
+				$add_user_query->execute();
+
+				if ($add_user_query->rowCount() == 0) {
+					return false;
+				}
+				else {
+					$user_row 			 = $add_user_query->fetch(PDO::FETCH_ASSOC);
+					$user_id 			 = $user_row['id'];			# users id
+					$user_pass_encrypted = $user_row['password'];	# users hashed password
+
+					if (password_verify($password, $user_pass_encrypted)) {
+						if ($cookies === true) {
+							$_SESSION['logSyscuruser'] = $user_id;
+
+							# save for 2 weeks
+							setcookie("logSyslogin", hash("sha256", $this->secureKey . $user_id . $this->secureKey), time() + (14 * 24 * 60 * 60), "/");
+							if (isset($_POST['remember_me']) && $this->rememberLoginDetails === true) {
+								setcookie("logSysrememberMe", $user_id, time() + (14 * 24 * 60 * 60), "/");
+							}
+							$this->loggedIn = true;
+						}
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
 			}
+			else {
+				return false;
+			}
+		}
+
+		public function register() {
+
 		}
 
 		# redirect to the setup page for

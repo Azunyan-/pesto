@@ -87,6 +87,9 @@
 			## write file
 			$conf_writer->writeFile();
 
+			# ADD USER TO DATABASE
+			$pesto->registerUser();
+
 			# GENERATE MESSAGE STUFF
 			$pesto->generateSuccess("Database successfully populated");
 		}
