@@ -4,7 +4,7 @@
 	class FileWriter {
 
 		# Name of file to output
-		private $fileName;
+		private $path;
 
 		# Files handle
 		private $fileHandle;
@@ -14,18 +14,18 @@
 
 		# Create a new FileWriter
 		#
-		# $fileName => The files name
+		# $path     => The files name & location
 		# $method   => The method of writing, w+ by default
-		public function __construct($fileName, $method = 'w+') {
-			$this->fileName = $fileName;
-			$this->fileHandle = fopen($this->fileName, $method);
+		public function __construct($path, $method = 'w+') {
+			$this->path = $path;
+			$this->fileHandle = fopen($this->path, $method);
 		}
 
 		# Add a line to the file with a newline
 		#
 		# $line     => The line to add to the file
-		public function addLine($line) {
-			$this->fileContent[] = $line . "\n";
+		public function addLine($line, $prefix = null) {
+			$this->fileContent[] = ($prefix != null ? $prefix : "") . $line . "\n";
 		}
 
 		# Add an empty line to the file
@@ -39,6 +39,7 @@
 				fwrite($this->fileHandle, $line);
 			}
 			fclose($this->fileHandle);
+			chmod($this->path, 0777);
 		}
 
 	}

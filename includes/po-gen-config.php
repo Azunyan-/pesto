@@ -1,6 +1,6 @@
 <?php
-
-	include 'includes/config.php';
+	
+	require_once 'po-file-writer.php';
 
 	# for generating the configuration file
 	if (isset($_POST['setup'])) {
@@ -21,6 +21,7 @@
 		$first_pass    = $_POST['pass1'];
 		$second_pass   = $_POST['pass2'];
 
+		$conf_writer   = new FileWriter("po-config.php");
 		$secure_key    = $pesto->generateSecureKey();
 
 		# connect to database
@@ -68,7 +69,25 @@
 
 			# GENERATE CONFIGURATION FILE
 
-			# We did it, generate a success message.
+			## start php tag
+			$conf_writer->addLine("<?php");
+			$conf_writer->emptyLine();	
+			
+			## add php database stuff
+			$conf_writer->addLine('$db_host = \'' . $database_host . '\';', "\t"); # $db_host = 'whatever';
+			$conf_writer->addLine('$db_port = \'' . $database_port . '\';', "\t"); # $db_port = 'whatever';
+			$conf_writer->addLine('$db_name = \'' . $database_name . '\';', "\t"); # $db_name = 'whatever';
+			$conf_writer->addLine('$db_user = \'' . $database_user . '\';', "\t"); # $db_user = 'whatever';
+			$conf_writer->addLine('$db_pass = \'' . $database_pass . '\';', "\t"); # $db_pass = 'whatever';
+
+			## close php tag
+			$conf_writer->emptyLine();	
+			$conf_writer->addLine("?>");
+
+			## write file
+			$conf_writer->writeFile();
+
+			# GENERATE MESSAGE STUFF
 			$pesto->generateSuccess("Database successfully populated");
 		}
 		else {
