@@ -21,6 +21,26 @@
 		# connect to database
 		if ($pesto->connectToDatabase($database_host, $database_port, $database_name, $database_user, $database_pass)) {
 			# we're good to go
+
+			# USERS TABLE
+			$create_users_sql = "
+				CREATE TABLE `po-users` (
+					`id` int(11) NOT NULL AUTO_INCREMENT,
+					`username` varchar(10) NOT NULL,
+					`email` tinytext NOT NULL,
+					`password` varchar(255) NOT NULL,
+					`name` varchar(40) NOT NULL,
+					`level` int(11) NOT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+			";
+			$create_users_query = $pesto->getConnection()->query($create_users_sql);
+			if ($create_users_query) {
+				# failed
+			}
+
+			# BLOG POSTS TABLE
+
 			$pesto->setConfigured(true);
 		}
 		else {

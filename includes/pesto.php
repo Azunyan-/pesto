@@ -5,6 +5,7 @@
 		# if pesto is configured
 		private $configured;
 
+		# "middleman" for connecting to the database
 		private $pdo;
 
 		# host for database
@@ -74,6 +75,11 @@
 			return false;
 		}
 
+		public function login($username, $password, $cookies = true) {
+			if ($this->isConfigured()) {
+			}
+		}
+
 		# redirect to the setup page for
 		# first time configuration
 		public function setupPesto() {
@@ -89,6 +95,12 @@
 		# configured or not
 		public function isConfigured() {
 			return $this->configured;
+		}
+
+		# return the pdo connection to the 
+		# database
+		public function getConnection() {
+			return $this->pdo;
 		}
 
 		# return the current page url

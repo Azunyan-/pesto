@@ -8,7 +8,7 @@
 					<h1>Setup Pesto</h1>
 					<p>
 						Setup your blog, make sure you have a MySQL database created. Pesto will do the rest
-						for you.
+						for you. Any table name collisions will be deleted/overwritten.
 					</p>
 				</div>
 			</div>
