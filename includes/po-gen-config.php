@@ -83,6 +83,7 @@
 			$conf_writer->addLine('$db_name = \'' . $database_name . '\';', "\t"); # $db_name = 'whatever';
 			$conf_writer->addLine('$db_user = \'' . $database_user . '\';', "\t"); # $db_user = 'whatever';
 			$conf_writer->addLine('$db_pass = \'' . $database_pass . '\';', "\t"); # $db_pass = 'whatever';
+			$conf_writer->addLine('$secureKey = \'' . $secure_key . '\';', "\t");  # $secureKey = 'my secure key';
 
 			## close php tag
 			$conf_writer->emptyLine();	

@@ -8,9 +8,6 @@
 
 	class Pesto {
 
-		# if pesto is configured
-		private $configured;
-
 		# "middleman" for connecting to the database
 		private $pdo;
 
@@ -50,6 +47,10 @@
 		# if login details should be remembered
 		private $rememberLoginDetails;
 
+		public function isConfigured() {
+			return file_exists("po-config.php");
+		}
+
 		# Connect to the given database
 		#
 		# $host      => database host
@@ -87,7 +88,6 @@
 					}
 				}
 				$this->user = $this->session;
-				$this->setConfigured(true);
 				return true;
 			}
 			catch (PDOException $ex) {
@@ -209,20 +209,6 @@
 		# first time configuration
 		public function setupPesto() {
 			$this->redirect("po-setup.php");
-		}
-
-		# set if pesto has been configured yet
-		#
-		# $configured => whether pesto has been configured
-		# 			     or not.
-		public function setConfigured($configured) {
-			$this->configured = $configured;
-		}
-
-		# return if pesto has been
-		# configured or not
-		public function isConfigured() {
-			return $this->configured;
 		}
 
 		# return the pdo connection to the 

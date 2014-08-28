@@ -5,5 +5,6 @@
 	$db_name = 'pesto-test';
 	$db_user = 'pesto';
 	$db_pass = '123';
+	$secureKey = 'Vjxp6UkCTZND';
 
 ?>
