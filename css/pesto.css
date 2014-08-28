@@ -27,8 +27,8 @@ body {
 	text-transform: uppercase;		   			/** make the post title uppercase */
 }
 
-/** Blog Post Dates */
-.post-date {
+/** Blog Post Meta (date -- author -- category) */
+.post-meta {
 	font-family: 'Roboto Slab', sans-serif;		/** Roboto Slab for post-dates */
 }
 
@@ -45,7 +45,6 @@ p {
 /** Headings */
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto Slab', sans-serif;
-	text-transform: uppercase;
 }
 
 /** Blog Name in the header/navigation */
@@ -77,7 +76,7 @@ div.space {
 }
 
 /* small font size */
-.small {
+span.small {
 	font-size: 50%;
 }
 
