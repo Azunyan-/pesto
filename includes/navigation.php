@@ -71,6 +71,9 @@
 						if (!$pesto->isLoggedIn())
 							echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
 						break;
+					default:
+						# do nothing
+						break;
 				}
 			}
 		?>
