@@ -194,6 +194,18 @@
 			}
 		}
 
+		# Returns if the current user
+		# is logged in
+		public function isLoggedIn() {
+			return $this->loggedIn;
+		}
+
+		# Checks if the user exists with the given username | email
+		#
+		# $username => the username to check with
+		# $email    => the email to check with
+		#
+		# returns true if a user owns either the username or email
 		public function userExists($username, $email) {
 			$user_exists_check_sql = "SELECT id FROM `po-users` WHERE `username` = :username OR `email` = :email ORDER BY `id` LIMIT 1";
 			$user_exists_check_query = $this->getConnection()->prepare($user_exists_check_sql);
