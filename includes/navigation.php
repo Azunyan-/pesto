@@ -1,19 +1,25 @@
 <?php
 
+	abstract class Type {
+		const SHOW_ALWAYS 		  = 0;
+		const SHOW_WHEN_LOGGED_IN = 1;
+		const HIDE_WHEN_LOGGED_IN = 2;
+	}
+
 	class Item {
 
 		# name of the item
 		private $name;
 
 		# if you must be logged in to view
-		private $login;
+		private $type;
 
 		# link of nav item
 		private $link;
 
-		public function __construct($name, $login, $link) {
+		public function __construct($name, $type, $link) {
 			$this->name = $name;
-			$this->login = $login;
+			$this->type = $type;
 			$this->link = $link;
 		}
 
@@ -21,8 +27,8 @@
 			return $this->name;
 		}
 
-		public function getLogin() {
-			return $this->login;
+		public function getType() {
+			return $this->type;
 		}
 
 		public function getLink() {
@@ -40,26 +46,31 @@
 			# navigation items
 			# link to page => name on navigation page
 			$navItem = array(
-				new Item("Home", false, "index.php"),
-				new Item("New Post", false, "new-post.php"),
-				new Item("Login", false, "po-login.php"),
-				new Item("Test", true, "http://www.google.com")
+				new Item("Home", Type::SHOW_ALWAYS, "index.php"),
+				new Item("New Post", Type::SHOW_WHEN_LOGGED_IN, "new-post.php"),
+				new Item("Login", Type::HIDE_WHEN_LOGGED_IN, "po-login.php"),
 			);
 
 			foreach ($navItem as $item) {
 				$name = $item->getName();
-				$view = $item->getLogin();
+				$type = $item->getType();
 				$link = $item->getLink();
 
 				# get if page is active
 				$active = $pesto->isCurrentPage($link) ? 'class="active"' : '';
 
-				# print the link and name into the nav bar
-				if ($view && $pesto->isLoggedIn()) { # print logged in ones
-					echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
-				}
-				else if ($view === false) { # they aren't logged in print non logged in ones
-					echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
+				switch ($type) {
+					case Type::SHOW_ALWAYS:
+						echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
+						break;
+					case Type::SHOW_WHEN_LOGGED_IN:
+						if ($pesto->isLoggedIn())
+							echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
+						break;
+					case Type::HIDE_WHEN_LOGGED_IN:
+						if (!$pesto->isLoggedIn())
+							echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
+						break;
 				}
 			}
 		?>
