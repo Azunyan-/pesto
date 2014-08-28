@@ -2,6 +2,9 @@
 
 	require_once 'config.php';
 
+	# debug mode is true for developers
+	define ('DEBUG_MODE', true);
+
 	# only redirect if we aren't already on the setup page.
 	if (!$pesto->isConfigured() && !$pesto->isCurrentPage("po-setup.php")) {
 		$pesto->setupPesto();

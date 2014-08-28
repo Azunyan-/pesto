@@ -19,33 +19,33 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<!-- Form for config. generation -->
-					<form class="form" method="po-gen-config.php" role="form">
+					<form class="form" action="po-gen-config.php" method="POST" role="form">
 						<!-- Database form section -->
 						<div class="database-settings">
 							<h2>Database Settings <span class="text-muted small">&mdash; for storing blogs, users, etc</span></h2>
 							<div class="form-group">
 								<legend for="host">Database Host</legend>
-								<input name="host" type="text" class="form-control" placeholder="127.0.0.1" autofocus required/>
+								<input name="host" type="text" class="form-control" placeholder="127.0.0.1" <?php if (DEBUG_MODE) { echo 'value="localhost"'; }?> autofocus required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="port">Database Port</legend>
-								<input name="port" type="text" class="form-control" placeholder="3306" required/>
+								<input name="port" type="text" class="form-control" placeholder="3306" <?php if (DEBUG_MODE) { echo 'value="3306"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="name">Database Name</legend>
-								<input name="name" type="text" class="form-control" placeholder="website-db" required/>
+								<input name="name" type="text" class="form-control" placeholder="website-db" <?php if (DEBUG_MODE) { echo 'value="pesto-test"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="user">Database Username</legend>
-								<input name="user" type="text" class="form-control" placeholder="root" required/>
+								<input name="user" type="text" class="form-control" placeholder="root" <?php if (DEBUG_MODE) { echo 'value="pesto"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="pass">Database Password</legend>
-								<input name="pass" type="password" class="form-control" placeholder="hunter2" required/>
+								<input name="pass" type="password" class="form-control" placeholder="hunter2" <?php if (DEBUG_MODE) { echo 'value="123"'; }?> required/>
 							</div>
 						</div>
 
@@ -55,32 +55,37 @@
 							<h2>Blog Settings <span class="text-muted small">&mdash; personalize your blog</span></h2>
 							<div class="form-group">
 								<legend for="blogname">Blog Name</legend>
-								<input name="blogname" type="text" class="form-control" placeholder="More songs about buildings and food" required/>
+								<input name="blogname" type="text" class="form-control" placeholder="More songs about buildings and food" <?php if (DEBUG_MODE) { echo 'value="Testing Blog"'; }?> required/>
+							</div>
+
+							<div class="form-group">
+								<legend for="blogdesc">Blog Description</legend>
+								<textarea rows="10" name="blogdesc" class="form-control" placeholder="A blog for people who like blogs" <?php if (DEBUG_MODE) { echo 'value="test"'; }?> required></textarea>
 							</div>
 
 							<div class="form-group">
 								<legend for="displayname">Display Name</legend>
-								<input name="displayname" type="text" class="form-control" placeholder="jcarmack" required/>
+								<input name="displayname" type="text" class="form-control" placeholder="jcarmack" <?php if (DEBUG_MODE) { echo 'value="admin"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="fullname">Full Name</legend>
-								<input name="fullname" type="text" class="form-control" placeholder="John Carmack" required/>
+								<input name="fullname" type="text" class="form-control" placeholder="John Carmack" <?php if (DEBUG_MODE) { echo 'value="Testing Things"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="email">Email</legend>
-								<input name="email" type="email" class="form-control" placeholder="jcarmack@gmail.com" required/>
+								<input name="email" type="email" class="form-control" placeholder="jcarmack@gmail.com" <?php if (DEBUG_MODE) { echo 'value="test@test.test"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="pass1">Password</legend>
-								<input name="pass1" type="password" class="form-control" placeholder="hunter2" required/>
+								<input name="pass1" type="password" class="form-control" placeholder="hunter2" <?php if (DEBUG_MODE) { echo 'value="123"'; }?> required/>
 							</div>
 
 							<div class="form-group">
 								<legend for="pass2">Confirm Password</legend>
-								<input name="pass2" type="password" class="form-control" placeholder="hunter2" required/>
+								<input name="pass2" type="password" class="form-control" placeholder="hunter2" <?php if (DEBUG_MODE) { echo 'value="123"'; }?> required/>
 							</div>
 						</div>
 

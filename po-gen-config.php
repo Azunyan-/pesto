@@ -16,7 +16,13 @@
 		$second_pass   = $_POST['pass2'];
 
 		# connect to database
-		$pesto = new Pesto();
+		if ($pesto->connectToDatabase($database_port, $database_port, $database_name, $database_user, $database_pass)) {
+			echo 'awesome';
+			# we're good to go
+		}
+		else {
+			# failed to connect
+		}
 
 		# generate tables
 

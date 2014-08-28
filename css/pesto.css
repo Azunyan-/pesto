@@ -12,3 +12,7 @@ div.gooch {
 .small {
 	font-size: 50%;
 }
+
+textarea {
+	resize: vertical;
+}

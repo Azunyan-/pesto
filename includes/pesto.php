@@ -5,6 +5,45 @@
 		# if pesto is configured
 		private $configured;
 
+		private $pdo;
+
+		# host for database
+		private $db_host;
+
+		# port for database, typically 3306
+		private $db_port;
+
+		# name for database
+		private $db_name;
+
+		# username for database
+		private $db_user;
+
+		# password for database
+		private $db_pass;
+
+		public function connectToDatabase($host, $port, $name, $user, $pass) {
+			# initialise db stuff
+			$this->db_host = $host;
+			$this->db_port = $port;
+			$this->db_name = $name;
+			$this->db_user = $user;
+			$this->db_pass = $pass;
+
+			# start a new session
+			session_start();
+
+			# create connection
+			try {
+				$this->pdo = new PDO("mysql:dbname={$this->db_name};host={$this->db_host};port={$this->db_port}", $this->db_user, $this->db_pass);
+				return true;
+			}
+			catch (PDOException $ex) {
+				return false;
+			}
+			return false;
+		}
+
 		# redirect to the setup page for
 		# first time configuration
 		public function setupPesto() {
