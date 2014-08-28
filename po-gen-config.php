@@ -1,6 +1,6 @@
 <?php
 
-	require_once 'includes/config.php';
+	include 'includes/config.php';
 
 	# for generating the configuration file
 	if (isset($_POST['setup'])) {
@@ -20,11 +20,10 @@
 
 		# connect to database
 		if ($pesto->connectToDatabase($database_host, $database_port, $database_name, $database_user, $database_pass)) {
-			echo 'awesome';
 			# we're good to go
+			$pesto->setConfigured(true);
 		}
 		else {
-			echo 'oh dear';
 			# failed to connect
 		}
 

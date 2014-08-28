@@ -22,6 +22,21 @@
 		# password for database
 		private $db_pass;
 
+		# the current user
+		private $user = false;
+
+		# if the user is logged in
+		private $loggedIn;
+
+		# login cookie
+		private $cookie;
+
+		# current user session
+		private $session;
+
+		# if the user should be remembered
+		private $remCook;
+
 		public function connectToDatabase($host, $port, $name, $user, $pass) {
 			# initialise db stuff
 			$this->db_host = $host;
@@ -36,10 +51,24 @@
 			# create connection
 			try {
 				$this->pdo = new PDO("mysql:dbname={$this->db_name};host={$this->db_host};port={$this->db_port}", $this->db_user, $this->db_pass);
+				$this->cookie  = isset($_COOKIE['logSyslogin']) ? $_COOKIE['logSyslogin'] : false;
+				$this->session = isset($_SESSION['logSyscuruser']) ? $_SESSION['logSyscuruser'] : false;
+				$this->remCook = isset($_COOKIE['logSysrememberMe']) ? $_COOKIE['logSysrememberMe'] : false;
+
+				$encUserId	   = hash("sha256", $this->secureKey . $this->session . $this->secureKey);
+				$this->loggedIn = $this->cookie == $encUserId ? true : false;
+
+				if ($this->rememberLoginDetails === true && isset($this->remCook) && $this->loggedIn === false) {
+					$encUserId		= hash("sha256", $this->secureKey . $this->remCook . $this->secureKey);
+					$this->loggedIn = $this->cookie == $encUserId ? true : false;
+					if ($this->loggedIn === true) {
+						$_SESSION['logSyscuruser'] = $this->remCook;
+					}
+				}
+				$this->user = $this->session;
 				return true;
 			}
 			catch (PDOException $ex) {
-				echo $ex;
 				return false;
 			}
 			return false;
@@ -49,6 +78,11 @@
 		# first time configuration
 		public function setupPesto() {
 			$this->redirect("po-setup.php");
+		}
+
+		# set if pesto has been configured yet
+		public function setConfigured($configured) {
+			$this->configured = $configured;
 		}
 
 		# return if pesto has been
