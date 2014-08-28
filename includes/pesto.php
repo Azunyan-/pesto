@@ -38,7 +38,13 @@
 		# if the user should be remembered
 		private $remCook;
 
-		public function connectToDatabase($host, $port, $name, $user, $pass) {
+		# secure key
+		private $secureKey;
+
+		# if login details should be remembered
+		private $rememberLoginDetails;
+
+		public function connectToDatabase($host, $port, $name, $user, $pass, $secureKey) {
 			# initialise db stuff
 			$this->db_host = $host;
 			$this->db_port = $port;
@@ -67,12 +73,36 @@
 					}
 				}
 				$this->user = $this->session;
+				$this->setConfigured(true);
 				return true;
 			}
 			catch (PDOException $ex) {
 				return false;
 			}
 			return false;
+		}
+
+		public function generateError($message) {
+			echo "
+				<div class='alert alert-danger' role='alert'>
+					{$message}
+				</div>
+			";
+		}
+
+		public function generateSuccess($message) {
+			echo "
+				<div class='alert alert-success' role='alert'>
+					{$message}
+				</div>
+			";
+		}
+
+		# generate a secure key with the given length
+		# default length is 12
+		public function generateSecureKey($length = 12) {
+			$letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			return substr(str_shuffle($letters), 0, $length);
 		}
 
 		public function login($username, $password, $cookies = true) {

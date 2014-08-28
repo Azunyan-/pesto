@@ -18,8 +18,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
+					<?php include 'po-gen-config.php' ?>
+
 					<!-- Form for config. generation -->
-					<form class="form" action="po-gen-config.php" method="POST" role="form">
+					<form class="form" action="po-setup.php" method="POST" role="form">
 						<!-- Database form section -->
 						<div class="database-settings">
 							<h2>Database Settings <span class="text-muted small">&mdash; for storing blogs, users, etc</span></h2>
