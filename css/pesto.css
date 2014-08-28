@@ -12,6 +12,11 @@
  * hopefully!
  */
 
+/** force a scrollbar to stop center jumps */
+html {
+	overflow-y: scroll;
+}
+
 /** Everything within the body tag */
 body {
 	padding-top: 20px;				   			/** some padding so everything isn't squished together */
@@ -64,6 +69,11 @@ h1, h2, h3, h4, h5, h6 {
 .nav-pills > li > a {
 	color: #263248; 
 	border-radius: 0;							/** flat design no rounded corners */
+}
+
+/** add a bit of space above the alert */
+.alert {
+	margin-top: 20px;
 }
 
 /** Navigation items active link color */

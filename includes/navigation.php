@@ -55,10 +55,10 @@
 				$active = $pesto->isCurrentPage($link) ? 'class="active"' : '';
 
 				# print the link and name into the nav bar
-				if ($view && $pesto->isLoggedIn()) {
+				if ($view && $pesto->isLoggedIn()) { # print logged in ones
 					echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
 				}
-				else if ($view === false) {
+				else if ($view === false) { # they aren't logged in print non logged in ones
 					echo "<li {$active}><a href='{$link}'>{$name}</a></li>";
 				}
 			}

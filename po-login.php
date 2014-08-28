@@ -1,4 +1,11 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+
+	include 'includes/header.php'; 
+
+	if ($pesto->isLoggedIn()) {
+		$pesto->redirect("index.php");
+	}
+?>
 
 	<body>
 
@@ -9,6 +16,7 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="post">
+						<?php include 'includes/po-check-login.php'; ?>
 						<h1>Login</h1>
 						<form class="form" action="po-login.php" method="POST">
 							<div class="form-group">
@@ -23,7 +31,7 @@
 
 							<div class="small-space"></div>
 
-							<button class="btn btn-primary form-control">Login</button>
+							<button type="submit" name="login" class="btn btn-primary form-control">Login</button>
 						</form>
 					</div>
 				</div>
