@@ -22,6 +22,11 @@ body {
 	margin-bottom: 120px; 			   			/** spacing at the bottom */
 }			
 
+label {
+	font-weight: normal;
+	font-family: 'Roboto', sans-serif;
+}
+
 /** Title of a Blog Post */
 .post-title {
 	text-transform: uppercase;		   			/** make the post title uppercase */
@@ -32,11 +37,6 @@ body {
 	font-family: 'Roboto Slab', sans-serif;		/** Roboto Slab for post-dates */
 }
 
-/** just there if I need it */
-.post-content {
-
-}
-
 /** Paragraphs */
 p {
 	color: #263248;
@@ -45,6 +45,7 @@ p {
 /** Headings */
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Roboto Slab', sans-serif;
+	text-transform: uppercase;
 }
 
 /** Blog Name in the header/navigation */
@@ -73,6 +74,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Use <div class="space"></div instead of <br />!! */
 div.space {
 	margin-top: 60px;
+}
+
+div.small-space {
+	margin-top: 20px;
 }
 
 /* small font size */

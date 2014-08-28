@@ -30,7 +30,7 @@
 		private $user = false;
 
 		# if the user is logged in
-		private $loggedIn;
+		private $loggedIn = false;
 
 		# login cookie
 		private $cookie;

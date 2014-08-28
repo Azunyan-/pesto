@@ -10,24 +10,27 @@
 				
 				<?php
 					function genPost($pesto) {
-						$result = file_get_contents('http://loripsum.net/api/5/medium/decorate/link/ul/ol/dl/bq/code/prude');
-						$len = strlen($result);
-						$max_len = 1000;
-						if ($len > $max_len) {
-							$result = substr($result, 0, $max_len);
-							$result .= "...";
+						$result = file_get_contents('http://loripsum.net/api/5/medium/decorate/ul/ol/dl/bq/code/prude');
+						$limit = 1000;
+						if(strlen($result) > $limit) {
+							$endpos = strpos(str_replace(array("\r\n", "\r", "\n", "\t"), ' ', $result), ' ', $limit);
+							if($endpos !== FALSE) {
+								$result = trim(substr($result, 0, $endpos)) . "...";
+							}
 						}
 						return $result;
 					}
 
 					function genTitle($post) {
-						$title = file_get_contents('http://loripsum.net/api/plaintext');
-						$len = strlen($title);
-						$max_len = 30;
-						if ($len > $max_len) {
-							$title = substr($title, $len / 2, $max_len + $len / $len);
+						$result = substr(file_get_contents('http://loripsum.net/api/plaintext'), 50, 250);
+						$limit = 20;
+						if(strlen($result) > $limit) {
+							$endpos = strpos(str_replace(array("\r\n", "\r", "\n", "\t"), ' ', $result), ' ', $limit);
+							if($endpos !== FALSE) {
+								$result = trim(substr($result, 0, $endpos)) . "...";
+							}
 						}
-						return $title;
+						return $result;
 					}
 				?>
 
