@@ -102,8 +102,6 @@
 					<h2></h2>
 				</div>
 			</div>
-
-			<div class="gooch"></div>
 		</div>
 	</body>
 

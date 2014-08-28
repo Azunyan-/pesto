@@ -1,16 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+
 body {
 	padding-top: 20px;
 	padding-bottom: 20px;	
+	background: #FFFFFF;
+	color: #000000;
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 120px; /** spacing at the bottom */
+}
+
+.post-title {
+	text-transform: uppercase;
+}
+
+.post-date {
+	font-family: 'Roboto Slab', sans-serif;
+}
+
+.post-content {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto Slab', sans-serif;
+}
+
+.brand {
+	text-transform: uppercase;
+}
+
+.nav-pills > li.active > a:hover,
+.nav-pills > li > a:hover {
+	background: #7E8AA2;
+	color: white;
+}
+
+.nav-pills > li > a {
+	color: #263248;
+}
+
+.nav-pills > li.active > a {
+	background: #263248;
+}
+
+.nav-pills > li > a {
+	border-radius: 0;
 }
 
 /* 60 pixels of space instead of <br> */
 div.space {
 	margin-top: 60px;
-}
-
-/* add some scroll space at the bottom */
-div.gooch {
-	margin-bottom: 180px;
 }
 
 /* small font size */
@@ -39,4 +79,5 @@ textarea {
 	margin-top: 0;	
 	margin-bottom: 0;
 	line-height: 40px;
+	font-size: 48px;
 }
