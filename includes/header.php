@@ -19,7 +19,12 @@
 	<head>
 		<title>
 			<?php 
-
+				if ($pesto->isConfigured()) {
+					echo $blog_name;
+				}
+				else {
+					echo 'Setup Pesto';
+				}
 			?>
 		</title>
 

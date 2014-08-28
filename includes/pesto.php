@@ -107,6 +107,28 @@
 			";
 		}
 
+		# Generates an informational message as a Bootstrap danger alert
+		#
+		# $message  => The message contained in the alert
+		public function generateInfo($message) {
+			echo "
+				<div class='alert alert-info' role='alert'>
+					{$message}
+				</div>
+			";
+		}
+
+		# Generates a warning message as a Bootstrap danger alert
+		#
+		# $message  => The message contained in the alert
+		public function generateWarning($message) {
+			echo "
+				<div class='alert alert-warning' role='alert'>
+					{$message}
+				</div>
+			";
+		}
+
 		# Generates a success message as a Bootstrap success alert
 		#
 		# $message  => The message contained in the alert

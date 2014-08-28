@@ -1,3 +1,8 @@
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;	
+}
+
 /* 60 pixels of space instead of <br> */
 div.space {
 	margin-top: 60px;
@@ -13,12 +18,25 @@ div.gooch {
 	font-size: 50%;
 }
 
-/* adding some margin to alert divs */
-.alert {
-	margin-top: 20px;
-}
-
 /* only allow vertical resize of textareas */
 textarea {
 	resize: vertical;
+}
+
+/** resize headers for responsive shit */
+@media screen and (min-width: 768px) {
+	.header {
+		margin-bottom: 30px;
+	}
+}
+
+.header {
+	border-bottom: 1px solid #ccc;
+}
+
+.header h3 {
+	padding-bottom: 19px;
+	margin-top: 0;	
+	margin-bottom: 0;
+	line-height: 40px;
 }

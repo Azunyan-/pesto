@@ -78,12 +78,14 @@
 			$conf_writer->emptyLine();	
 			
 			## add php database stuff
-			$conf_writer->addLine('$db_host = \'' . $database_host . '\';', "\t"); # $db_host = 'whatever';
-			$conf_writer->addLine('$db_port = \'' . $database_port . '\';', "\t"); # $db_port = 'whatever';
-			$conf_writer->addLine('$db_name = \'' . $database_name . '\';', "\t"); # $db_name = 'whatever';
-			$conf_writer->addLine('$db_user = \'' . $database_user . '\';', "\t"); # $db_user = 'whatever';
-			$conf_writer->addLine('$db_pass = \'' . $database_pass . '\';', "\t"); # $db_pass = 'whatever';
-			$conf_writer->addLine('$secureKey = \'' . $secure_key . '\';', "\t");  # $secureKey = 'my secure key';
+			$conf_writer->addLine('$db_host = \'' . addslashes($database_host) . '\';', "\t"); # $db_host   = 'whatever';
+			$conf_writer->addLine('$db_port = \'' . addslashes($database_port) . '\';', "\t"); # $db_port   = 'whatever';
+			$conf_writer->addLine('$db_name = \'' . addslashes($database_name) . '\';', "\t"); # $db_name   = 'whatever';
+			$conf_writer->addLine('$db_user = \'' . addslashes($database_user) . '\';', "\t"); # $db_user   = 'whatever';
+			$conf_writer->addLine('$db_pass = \'' . addslashes($database_pass) . '\';', "\t"); # $db_pass   = 'whatever';
+			$conf_writer->addLine('$secureKey = \'' . addslashes($secure_key) . '\';', "\t");  # $secureKey = 'my secure key';
+			$conf_writer->addLine('$blog_desc = \'' . addslashes($blog_desc) . '\';', "\t");   # $blog_desc = 'my blog';
+			$conf_writer->addLine('$blog_name = \'' . addslashes($blog_name) . '\';', "\t");   # $blog_name = 'The Pesto Blog';
 
 			## close php tag
 			$conf_writer->emptyLine();	

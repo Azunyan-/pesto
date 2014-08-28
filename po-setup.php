@@ -4,7 +4,10 @@
 		<!-- Heading section with additional information -->
 		<div class="container">
 			<div class="row">
-				<?php include 'includes/po-gen-config.php' ?>
+				<?php 
+					$pesto->generateInfo("It is highly reccommended that you delete this file after setup!");
+					include 'includes/po-gen-config.php';
+				?>
 				<div class="col-lg-8">
 					<h1>Setup Pesto</h1>
 					<p>
