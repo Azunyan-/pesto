@@ -30,7 +30,7 @@
 		private $user = false;
 
 		# if the user is logged in
-		private $loggedIn = false;
+		private $loggedIn;
 
 		# login cookie
 		private $cookie;
@@ -243,7 +243,7 @@
 		#
 		# $length   => length of the secure key, default is 12
 		public function generateSecureKey($length = 12) {
-			$letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			$letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$@%&*()£![];.,";
 			return substr(str_shuffle($letters), 0, $length);
 		}
 

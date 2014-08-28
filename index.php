@@ -34,9 +34,11 @@
 							<div class="post">
 								<h1 class="post-title">' . genTitle($pesto) . '</h1>
 								<h5 class="post-meta text-muted">Felix Angell &middot; August 20, 2014 &middot; Subject: <a href="#">Secure Keys</a></h5>
-								<p class="post-content">'
+								<div class="post-content">'
 									. genPost($pesto) . 
-								'</p>
+								'</div>
+								<div class="small-space"></div>
+								<a href="#" class="btn btn-primary">Read More</a>
 							</div>
 							';
 						}
