@@ -58,10 +58,14 @@
 				<div class="col-lg-4">
 					<div class="post">
 						<h1>Subjects</h1>
+						<p>
+							Subjects you use a lot:
+						</p>
+
 						<ul>
 							<?php
 							foreach ($blogSystem->getSubjects() as $row) {
-								echo "<li><a href='javascript:;' onclick=\"change('{$row['subject']}')\">{$row['subject']}</a></li>";
+								echo "<li><a href='javascript:;' onclick=\"change('{$row['subject']}')\">&quot;{$row['subject']}&quot; &mdash; used {$row['used']} times</a></li>";
 							}
 							?>
 						</ul>
