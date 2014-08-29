@@ -112,6 +112,8 @@ span.small {
 /* only allow vertical resize of textareas */
 textarea {
 	resize: vertical;
+	border: 1px solid #999999;
+	font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 /* add a line below the header */

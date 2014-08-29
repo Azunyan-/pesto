@@ -90,5 +90,5 @@
 			}
 		?>
 	</ul>
-	<h3 class="brand">Blog Name<br /> <span class="small">Probably the best blog ever made</span></h3>
+	<h3 class="brand"><?php echo $blog_name; ?><br /> <span class="small"><?php echo $tag_line; ?></span></h3>
 </div>

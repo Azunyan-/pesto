@@ -1,18 +1,57 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+
+	include 'includes/header.php'; 
+
+	# this is a small function so that the html is cleaner
+	# will return a template description placeholder written in
+	# markdown, the weird formatting is beacuse it's in a textarea
+	# so how you see it is how it's displayed.
+	function desc() {
+return "# Markdown
+Pesto uses markdown for writing blog posts, in addition to this,
+we also use it for smaller things such as this description field.
+Everything inside of this field will go in the about section on
+your Blog! So make this as detailed as you can!
+
+# What is markdown?
+Markdown is a simplified markup language which is parsed to HTML.
+So instead of writing the following for a link:
+
+	<a href='http://www.google.com'>Google</a>
+
+It is written as...
+
+	[Google](http://www.google.com)
+
+# How do I write Markdown?
+You **dont** have to use Markdown to write this description, however,
+the audience of your blog will be more likely to read the about section
+if it's formatted nicely! If you want to learn markdown, check the link
+in the 'Setup Pesto' paragraph!
+";
+	}
+
+?>
 
 	<body>
 		<!-- Heading section with additional information -->
 		<div class="container">
 			<div class="row">
 				<?php 
+					# this is important!
 					$pesto->generateInfo("It is highly reccommended that you delete this file after setup!");
+					
+					# include the generation stuff
 					include 'includes/po-gen-config.php';
 				?>
 				<div class="col-lg-8">
 					<h1>Setup Pesto</h1>
 					<p>
 						Setup your blog, make sure you have a MySQL database created. Pesto will do the rest
-						for you. Any table name collisions will be deleted/overwritten.
+						for you. Any table name collisions will be deleted/overwritten. Please note that Pesto
+						uses Markdown throughout the website, so if you don't know Markdown, I highly suggest
+						that you check out <a href="http://markdowntutorial.com/" target="_blank">this tutorial</a>.
+						It's very easy to learn!
 					</p>
 				</div>
 			</div>
@@ -63,8 +102,13 @@
 							</div>
 
 							<div class="form-group">
+								<legend for="tagline">Tagline</legend>
+								<input name="tagline" type="text" class="form-control" placeholder="Probably the best blogan in the world" <?php if (DEBUG_MODE) { echo 'value="wow"'; } ?> required/>
+							</div>
+
+							<div class="form-group">
 								<legend for="blogdesc">Blog Description</legend>
-								<textarea rows="10" name="blogdesc" class="form-control" placeholder="A blog for people who like blogs" <?php if (DEBUG_MODE) { echo 'value="test"'; }?> required></textarea>
+								<textarea rows="25" name="blogdesc" class="form-control" placeholder="<?php echo desc(); ?>" <?php if (DEBUG_MODE) { echo 'value="test"'; }?> required></textarea>
 							</div>
 
 							<div class="form-group">

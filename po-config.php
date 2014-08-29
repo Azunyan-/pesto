@@ -5,8 +5,9 @@
 	$db_name = 'pesto-test';
 	$db_user = 'pesto';
 	$db_pass = '123';
-	$secureKey = 'fqvo(I)tp8Â3';
-	$blog_desc = 'test';
+	$secureKey = 'se(b2jxt6uR8';
+	$blog_desc = '<h1>fuck</h1>';
+	$tag_line = 'wow';
 	$blog_name = 'Testing Blog';
 
 ?>

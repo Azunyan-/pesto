@@ -14,6 +14,7 @@
 
 		# users desired blog info stuff
 		$blog_name 	   = $_POST['blogname'];
+		$tag_line	   = $_POST['tagline'];
 		$blog_desc	   = $_POST['blogdesc'];
 		$display_name  = $_POST['displayname'];
 		$full_name     = $_POST['fullname'];
@@ -92,6 +93,7 @@
 			$conf_writer->addLine('$db_pass = \'' . addslashes($database_pass) . '\';', "\t"); # $db_pass   = 'whatever';
 			$conf_writer->addLine('$secureKey = \'' . addslashes($secure_key) . '\';', "\t");  # $secureKey = 'my secure key';
 			$conf_writer->addLine('$blog_desc = \'' . addslashes($blog_desc) . '\';', "\t");   # $blog_desc = 'my blog';
+			$conf_writer->addLine('$tag_line = \'' . addslashes($tag_line) . '\';', "\t");	   # $tag_line  = 'totes amzng blog ye';
 			$conf_writer->addLine('$blog_name = \'' . addslashes($blog_name) . '\';', "\t");   # $blog_name = 'The Pesto Blog';
 
 			## close php tag

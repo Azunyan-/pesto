@@ -1,4 +1,11 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+
+	include 'libs/Parsedown.php';
+	include 'includes/header.php'; 
+
+	$parser = new Parsedown();
+
+?>
 
 	<body>
 
@@ -7,39 +14,33 @@
 			<?php include 'includes/navigation.php'; ?>
 
 			<div class="row">
-				
-				<?php
-					function genPost($pesto) {
-						$result = file_get_contents('http://loripsum.net/api/5/link/medium/decorate/ul/ol/dl/bq/code/prude');
-						return $pesto->truncateHTML($result, 1000);
-					}
-
-					function genTitle($post) {
-						$result = substr(file_get_contents('http://loripsum.net/api/plaintext'), 50, 250);
-						$limit = 20;
-						if(strlen($result) > $limit) {
-							$endpos = strpos(str_replace(array("\r\n", "\r", "\n", "\t"), ' ', $result), ' ', $limit);
-							if($endpos !== FALSE) {
-								$result = trim(substr($result, 0, $endpos)) . "...";
-							}
-						}
-						return $result;
-					}
-				?>
-
 				<div class="col-lg-8">
 					<?php
 						foreach ($blogSystem->getPosts() as $post) {
+							# for getting the name, since we only have the subjects id
 							$subject_handle = $blogSystem->getSubjectById($post['subject_id']);
+							
+							# store the id of the owner
+							$user_id = $post['owner_id'];
+							
+							# information about the user with the given id
+							$user_handle = $pesto->getUser($user_id);
+							
+							# the username taken from the user record
+							$username = $user_handle['username'];
+
+							# reformat the date to something more readable
+							$formatted_date = date("d M Y", strtotime($post['date']));
+
 							echo '
 							<div class="post">
-								<h1 class="post-title"></h1>
-								<h5 class="post-meta text-muted">Felix Angell &middot; August 20, 2014 &middot; Subject: <a href="#">'. $subject_handle['subject'] .'</a></h5>
+								<h1 class="post-title">'. $post['title']. '</h1>
+								<h5 class="post-meta text-muted"><a href="#">' . $username . '</a> &middot; '. $formatted_date .' &middot; Subject: <a href="#">'. $subject_handle['subject'] .'</a></h5>
 								<div class="post-content">'
-									. $post['content'] .
+									. $parser->text($post['content']) .
 								'</div>
 								<div class="small-space"></div>
-								<a href="#" class="btn btn-primary">Read More</a>
+								<a href="#" class="btn btn-primary btn-sm">Read More</a>
 							</div>
 							';
 						}
@@ -49,7 +50,7 @@
 				<div class="col-lg-4">
 					<h1>About</h1>
 					<p>
-						<?php echo genPost($pesto); ?>
+						About 
 					</p>
 				</div>
 			</div>
