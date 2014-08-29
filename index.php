@@ -29,13 +29,14 @@
 
 				<div class="col-lg-8">
 					<?php
-						for ($i = 0; $i < 10; $i++) {
+						foreach ($blogSystem->getPosts() as $post) {
+							$subject_handle = $blogSystem->getSubjectById($post['subject_id']);
 							echo '
 							<div class="post">
-								<h1 class="post-title">' . genTitle($pesto) . '</h1>
-								<h5 class="post-meta text-muted">Felix Angell &middot; August 20, 2014 &middot; Subject: <a href="#">Secure Keys</a></h5>
+								<h1 class="post-title"></h1>
+								<h5 class="post-meta text-muted">Felix Angell &middot; August 20, 2014 &middot; Subject: <a href="#">'. $subject_handle['subject'] .'</a></h5>
 								<div class="post-content">'
-									. genPost($pesto) . 
+									. $post['content'] .
 								'</div>
 								<div class="small-space"></div>
 								<a href="#" class="btn btn-primary">Read More</a>

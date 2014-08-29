@@ -22,6 +22,12 @@
 			return $get_post_query->fetch(PDO::FETCH_ASSOC);
 		}
 
+		public function getPosts() {
+			$get_posts_sql = "SELECT * FROM `po-blog-posts` ORDER BY UNIX_TIMESTAMP(`date`) DESC";
+			$get_posts_query = $this->connection->query($get_posts_sql);
+			return $get_posts_query->fetchAll(PDO::FETCH_ASSOC);
+		}
+
 		# Create a new Subject, will not be created if it's already in the
 		# Subjects table
 		#
@@ -53,6 +59,22 @@
 			$subject_with_sql = "SELECT * FROM `po-subjects` WHERE `subject` = :subject ORDER BY `id` LIMIT 1";
 			$subject_with_query = $this->connection->prepare($subject_with_sql);
 			$subject_with_query->bindParam(":subject", $subjectName);
+			$subject_with_query->execute();
+
+			if ($subject_with_query->rowCount() == 0) return false;
+
+			return $subject_with_query->fetch(PDO::FETCH_ASSOC);
+		}
+
+		# Returns the record with the given subject id
+		#
+		# $subject_id => the subjects id to check
+		#
+		# returns an array of the record data if the subject exists
+		public function getSubjectById($subject_id) {
+			$subject_with_sql = "SELECT * FROM `po-subjects` WHERE `id` = :subject ORDER BY `id` LIMIT 1";
+			$subject_with_query = $this->connection->prepare($subject_with_sql);
+			$subject_with_query->bindParam(":subject", $subject_id);
 			$subject_with_query->execute();
 
 			if ($subject_with_query->rowCount() == 0) return false;

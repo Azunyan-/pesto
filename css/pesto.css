@@ -40,6 +40,7 @@ label {
 /** Blog Post Meta (date -- author -- category) */
 .post-meta {
 	font-family: 'Roboto Slab', sans-serif;		/** Roboto Slab for post-dates */
+	text-transform: none;
 }
 
 .post {
