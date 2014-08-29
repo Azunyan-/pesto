@@ -59,7 +59,7 @@
 					<div class="post">
 						<h1>Subjects</h1>
 						<p>
-							Subjects you use a lot:
+							Subjects you use a lot (click to set subject):
 						</p>
 
 						<ul>

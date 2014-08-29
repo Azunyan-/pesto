@@ -69,7 +69,7 @@
 				CREATE TABLE IF NOT EXISTS `po-subjects` (
 					`id` int(11) NOT NULL AUTO_INCREMENT,
 					`subject` varchar(200) NOT NULL,
-					`used` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+					`used` INT(11) UNSIGNED NOT NULL DEFAULT '1',
 					PRIMARY KEY (`id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 			";

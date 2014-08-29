@@ -27,15 +27,42 @@
 		#
 		# returns if the insertion was a success or not
 		public function createNewSubject($subject) {
-			$create_subject_sql = "INSERT IGNORE INTO `po-subjects` (`subject`) VALUES (:subject)";
+			$create_subject_sql = "INSERT IGNORE INTO `po-subjects` (`subject`, `used`) VALUES (:subject, :used)";
 			$create_subject_query = $this->connection->prepare($create_subject_sql);
 			$create_subject_query->bindParam(":subject", $subject);
+			$one = 1;
+			$create_subject_query->bindParam(":used", $one = 1, PDO::PARAM_INT);
 			return $create_subject_query->execute();
+		}
+
+		# Increment used by 1
+		public function updateSubjectUsed($subject_id, $newValue) {
+			$update_subject_sql = "UPDATE `po-subjects` SET `used` = :used WHERE `id` = :id";
+			$update_subject_query = $this->connection->prepare($update_subject_sql);
+			$update_subject_query->bindParam(":used", $newValue);
+			$update_subject_query->bindParam(":id", $subject_id);
+			return $update_subject_query->execute();
+		}
+
+		# Returns the record with the given subject name
+		#
+		# $subjectName => the subjects name to check
+		#
+		# returns an array of the record data if the subject exists
+		public function getSubjectWithName($subjectName) {
+			$subject_with_sql = "SELECT * FROM `po-subjects` WHERE `subject` = :subject ORDER BY `id` LIMIT 1";
+			$subject_with_query = $this->connection->prepare($subject_with_sql);
+			$subject_with_query->bindParam(":subject", $subjectName);
+			$subject_with_query->execute();
+
+			if ($subject_with_query->rowCount() == 0) return false;
+
+			return $subject_with_query->fetch(PDO::FETCH_ASSOC);
 		}
 
 		# Return all the subjects as an array
 		public function getSubjects() {
-			$get_subject_sql = "SELECT * FROM `po-subjects` ORDER BY `id` LIMIT 20";
+			$get_subject_sql = "SELECT * FROM `po-subjects` ORDER BY `used` DESC LIMIT 20";
 			$get_subject_query = $this->connection->query($get_subject_sql);
 			return $get_subject_query->fetchAll(PDO::FETCH_ASSOC);
 		}
