@@ -50,7 +50,9 @@
 				<div class="col-lg-4">
 					<h1>About</h1>
 					<p>
-						About 
+						<?php
+							echo $parser->text($blog_desc);
+						?> 
 					</p>
 				</div>
 			</div>

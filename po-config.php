@@ -6,7 +6,7 @@
 	$db_user = 'pesto';
 	$db_pass = '123';
 	$secureKey = 'se(b2jxt6uR8';
-	$blog_desc = '<h1>fuck</h1>';
+	$blog_desc = '# oh my god';
 	$tag_line = 'wow';
 	$blog_name = 'Testing Blog';
 
