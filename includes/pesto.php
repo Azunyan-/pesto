@@ -338,6 +338,30 @@
 			return $register_user_query->execute();
 		}
 
+		# Quick method of getting current/specified users 
+		# information
+		# 
+		# $user => id of the user you want to retrieve info about
+		#          optional paremeter, if nothing is specified will
+		#          retrieve information about the current user
+		#
+		# Returns user information in an array
+		public function getUser($user = null) {
+			$user = $user == null ? $user = $this->user : $user;
+			$get_user_sql = "SELECT * FROM `po-users` WHERE `id` = :id ORDER BY `id` LIMIT 1";
+			$get_user_query = $this->getConnection()->prepare($get_user_sql);
+			$get_user_query->bindParam(":id", $user);
+			$get_user_query->execute();
+			return $get_user_query->fetch(PDO::FETCH_ASSOC);
+		}
+
+		# Logout, destroys session resets cookies
+		public function logout() {
+			session_destroy();
+			setcookie("logSyscuruser", time() - 3600, "/");
+			setcookie("logSysrememberMe", "", time() - 3600, "/");
+		}
+
 		# redirect to the setup page for
 		# first time configuration
 		public function setupPesto() {

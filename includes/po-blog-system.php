@@ -22,6 +22,24 @@
 			return $get_post_query->fetch(PDO::FETCH_ASSOC);
 		}
 
+		# Create a new Subject, will not be created if it's already in the
+		# Subjects table
+		#
+		# returns if the insertion was a success or not
+		public function createNewSubject($subject) {
+			$create_subject_sql = "INSERT IGNORE INTO `po-subjects` (`subject`) VALUES (:subject)";
+			$create_subject_query = $this->connection->prepare($create_subject_sql);
+			$create_subject_query->bindParam(":subject", $subject);
+			return $create_subject_query->execute();
+		}
+
+		# Return all the subjects as an array
+		public function getSubjects() {
+			$get_subject_sql = "SELECT * FROM `po-subjects` ORDER BY `id` LIMIT 20";
+			$get_subject_query = $this->connection->query($get_subject_sql);
+			return $get_subject_query->fetchAll(PDO::FETCH_ASSOC);
+		}
+
 		# Create a new Blog Post
 		#
 		# $title 	=> Title of the blog post

@@ -21,12 +21,12 @@
 						<form class="form" action="po-login.php" method="POST">
 							<div class="form-group">
 								<label for="displayname">Username:</label>
-								<input type="text" name="displayname" class="form-control" />
+								<input type="text" name="displayname" class="form-control" autofocus required/>
 							</div>
 
 							<div class="form-group">
 								<label for="password">Password:</label>
-								<input type="password" name="password" class="form-control" />
+								<input type="password" name="password" class="form-control" required/>
 							</div>
 
 							<div class="small-space"></div>

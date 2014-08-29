@@ -18,14 +18,7 @@
 
 	<head>
 		<title>
-			<?php 
-				if ($pesto->isConfigured()) {
-					echo $blog_name;
-				}
-				else {
-					echo 'Setup Pesto';
-				}
-			?>
+			<?php  echo $pesto->isConfigured() ? $blog_name : "Setup Pesto"; ?>
 		</title>
 
 		<!-- CSS -->

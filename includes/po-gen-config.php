@@ -32,15 +32,9 @@
 		if ($pesto->connectToDatabase($database_host, $database_port, $database_name, $database_user, $database_pass, $secure_key)) {
 			# we're good to go
 
-			# DELETE EXISTING TABLES
-			$delete_users_sql = "DROP TABLE IF EXISTS `po-users`";
-			$delete_users_query = $pesto->getConnection()->query($delete_users_sql);
-			$delete_blog_posts_sql = "DROP TABLE IF EXISTS `po-blog-posts`";
-			$delete_blog_posts_query = $pesto->getConnection()->query($delete_blog_posts_sql);
-
 			# USERS TABLE
 			$create_users_sql = "
-				CREATE TABLE `po-users` (
+				CREATE TABLE IF NOT EXISTS `po-users` (
 					`id` int(11) NOT NULL AUTO_INCREMENT,
 					`username` varchar(10) NOT NULL,
 					`email` tinytext NOT NULL,
@@ -57,7 +51,7 @@
 
 			# BLOG POSTS TABLE
 			$create_blog_posts_sql = "
-				CREATE TABLE `po-blog-posts` (
+				CREATE TABLE IF NOT EXISTS `po-blog-posts` (
 					`id` int(11) NOT NULL AUTO_INCREMENT,
 					`title` varchar(200) NOT NULL,
 					`content` text NOT NULL,
@@ -69,6 +63,18 @@
 			$create_blog_posts_query = $pesto->getConnection()->query($create_blog_posts_sql);
 			if (!$create_blog_posts_query) {
 				$pesto->generateError("Failed to create `po-blog-posts` table!");
+			}
+
+			$create_subjects_sql = "
+				CREATE TABLE IF NOT EXISTS `po-subjects` (
+					`id` int(11) NOT NULL AUTO_INCREMENT,
+					`subject` varchar(200) NOT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+			";
+			$create_subjects_query = $pesto->getConnection()->query($create_subjects_sql);
+			if (!$create_subjects_query) {
+				$pesto->generateError("Failed to create `po-subjects` table!");
 			}
 
 			# GENERATE CONFIGURATION FILE
@@ -118,7 +124,9 @@ function countdown() {
 	if (counter_index < 2) {
 		location.href = "index.php";
 	}
-	counter_index -= 1;
+	else {
+		counter_index -= 1;
+	}
 	$('#counter').html(counter_index);
 }
 $(document).ready(function() {

@@ -72,7 +72,15 @@ h1, h2, h3, h4, h5, h6 {
 /** Navigation items (no hover) */
 .nav-pills > li > a {
 	color: #263248; 
-	border-radius: 0;							/** flat design no rounded corners */
+}
+
+/** flat no rounded corners */
+pre,
+input.form-control,
+textarea.form-control,
+.nav-pills > li > a,
+.btn {
+	border-radius: 0;
 }
 
 /** add a bit of space above the alert */
