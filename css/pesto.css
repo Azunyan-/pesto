@@ -76,6 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /** flat no rounded corners */
 pre,
+.alert,
 input.form-control,
 textarea.form-control,
 .nav-pills > li > a,
